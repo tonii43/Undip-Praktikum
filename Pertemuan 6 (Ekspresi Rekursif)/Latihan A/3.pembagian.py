@@ -1,4 +1,4 @@
-# Nama file : 4.pembagian.py
+# Nama file : 3.pembagian.py
 # Deskripsi : menghitung pembagian dari x dan y secara rekursif.
 # Pembuat   : Muhammad Dimas Arya Putra / 24060124130062
 # Tanggal   : 1 Oktober 2024

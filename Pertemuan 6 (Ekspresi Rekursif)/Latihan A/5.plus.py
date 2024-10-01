@@ -1,4 +1,4 @@
-# Nama file : 1.plus.py
+# Nama file : 5.plus.py
 # Deskripsi : menghitung penjumlahan antara x dan y secara rekursif.
 # Pembuat   : Muhammad Dimas Arya Putra / 24060124130062
 # Tanggal   : 1 Oktober 2024

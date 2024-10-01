@@ -1,4 +1,4 @@
-# Nama file : 3.perkalian.py
+# Nama file : 2.perkalian.py
 # Deskripsi : menghitung perkalian dari x dan y secara rekursif.
 # Pembuat   : Muhammad Dimas Arya Putra / 24060124130062
 # Tanggal   : 1 Oktober 2024

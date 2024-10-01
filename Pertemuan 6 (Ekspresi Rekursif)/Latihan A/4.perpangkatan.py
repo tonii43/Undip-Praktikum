@@ -1,4 +1,4 @@
-# Nama file : 5.perpangkatan.py
+# Nama file : 4.perpangkatan.py
 # Deskripsi : menghitung perpangkatan dari x dan y secara rekursif, x adalah nilai asli, dan y adalah pangkatnya.
 # Pembuat   : Muhammad Dimas Arya Putra / 24060124130062
 # Tanggal   : 1 Oktober 2024

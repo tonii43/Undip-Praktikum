@@ -1,4 +1,4 @@
-# Nama file : 0.fibonacci.py
+# Nama file : 7.fibonacci.py
 # Deskripsi : menghitung bilangan Fibonacci ke-n secara rekursif
 # Pembuat   : Muhammad Dimas Arya Putra / 24060124130062
 # Tanggal   : 1 Oktober 2024

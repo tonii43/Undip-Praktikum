@@ -1,4 +1,4 @@
-# Nama file : 2.min.py
+# Nama file : 1.min.py
 # Deskripsi : menghitung pengurangan antara x dan y secara rekursif.
 # Pembuat   : Muhammad Dimas Arya Putra / 24060124130062
 # Tanggal   : 1 Oktober 2024
