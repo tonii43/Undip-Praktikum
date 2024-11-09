@@ -31,5 +31,5 @@ print(y)
 
 #mencari nilai max dari suatu parameter
 def max2(x,y):
-    return (int)((x + y) + (fx2(x-y))**0.5) // 2
+    return ((x + y) + (fx2(x-y))**0.5) // 2
 print(max2(1000, 32313))
