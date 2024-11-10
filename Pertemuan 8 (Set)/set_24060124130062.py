@@ -198,15 +198,18 @@ print(NBIntersect([1,2,3],[6,5,3]))
 #   NBUnion(H1,H2) menghasilkan jumlah elemen hasil gabungan antara H1 dan H2
 #   tanpa memanfaatkan fungsi MakeUnion(H1,H2).
 def NBUnion(S1, S2):
-    if IsEmpty(S1) or IsEmpty(S2):
+    if IsEmpty(S1) and IsEmpty(S2):
         return 0
+    elif IsEmpty(S1) and not IsEmpty(S2):
+        return NbElmt(S2)
+    elif not IsEmpty(S1) and IsEmpty(S2):
+        return NbElmt(S1)
+    elif IsMember(FirstElmt(S1), S2):
+        return NBUnion(Tail(S1), S2)
     else:
-        if IsMember(FirstElmt(S1), S2):
-            return 1 + NBUnion(Tail(S1), S2)
-        else:
-            return 2 + NBUnion(Tail(S1), S2)
+        return 1 + NBUnion(Tail(S1), S2)
 
 # APLIKASI
-print(NBUnion([1,2,3],[3,4,5]))
+print(NBUnion([1,2,3],[]))
 print(NBUnion([1,2,3],[4,5,6]))
 print(NBUnion([1,2,3],[6,2,3]))
