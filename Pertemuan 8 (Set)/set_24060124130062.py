@@ -102,12 +102,12 @@ print(IsSet([1,2,2]))
 
 # IsSubset: 2 set -> boolean
 #   IsSubset(H1,H2) mengembalikan true jika H1 merupakan subset dari H2
-def IsSubset(L1, L2):
-    if IsEmpty(L1):
+def IsSubset(H1, H2):
+    if IsEmpty(H1):
         return True
     else:
-        if IsMember(FirstElmt(L1), L2):
-            return IsSubset(Tail(L1), L2)
+        if IsMember(FirstElmt(H1), H2):
+            return IsSubset(Tail(H1), H2)
         else:
             return False
 
@@ -117,12 +117,12 @@ print(IsSubset([1,2,3], [1,2]))
 
 # IsEqualSet: 2 set -> boolean
 #   IsEqualSet(H1,H2} benar jika H1 adalah set yang sama dengan H2
-def IsEqualSet(S1, S2):
-    if IsEmpty(S1):
+def IsEqualSet(H1, H2):
+    if IsEmpty(H1):
         return True
     else:
-        if IsMember(FirstElmt(S1), S2):
-            return IsEqualSet(Tail(S1), S2)
+        if IsMember(FirstElmt(H1), H2):
+            return IsEqualSet(Tail(H1), H2)
         else:
             return False
         
@@ -132,14 +132,14 @@ print(IsEqualSet([1,2,3], [1,2,4]))
 
 # IsIntersect: 2 set -> boolean
 #   IsIntersect(H1,H2) benar jika H1 beririsan dengan H2
-def IsIntersect(S1, S2):
-    if IsEmpty(S1):
+def IsIntersect(H1, H2):
+    if IsEmpty(H1):
         return False
     else:
-        if IsMember(FirstElmt(S1), S2):
+        if IsMember(FirstElmt(H1), H2):
             return True
         else:
-            return IsIntersect(Tail(S1), S2)
+            return IsIntersect(Tail(H1), H2)
         
 # APLIKASI
 print(IsIntersect([1,2,3],[3,4,5]))
@@ -149,14 +149,14 @@ print(IsIntersect([1,2,3],[4,5,6]))
 
 # MakeIntersect: 2 set -> set
 #   MakeIntersect(H1,H2) menghasilkan set baru yang merupakan hasil irisan antara H1 dan H2
-def MakeIntersect(S1, S2):
-    if IsEmpty(S1):
+def MakeIntersect(H1, H2):
+    if IsEmpty(H1):
         return []
     else:
-        if IsMember(FirstElmt(S1), S2):
-            return Konso(FirstElmt(S1), MakeIntersect(Tail(S1), S2))
+        if IsMember(FirstElmt(H1), H2):
+            return Konso(FirstElmt(H1), MakeIntersect(Tail(H1), H2))
         else:
-            return MakeIntersect(Tail(S1),S2)
+            return MakeIntersect(Tail(H1),H2)
         
 # APLIKASi
 print(MakeIntersect([1,2,3],[3,4,5]))
@@ -164,14 +164,14 @@ print(MakeIntersect([1,2,3],[4,5,6]))
 
 # MakeUnion: 2 set -> set
 #   MakeUnion(H1,H2) menghasilkan set baru yang merupakan hasil gabungan antara H1 dan H2
-def MakeUnion(S1, S2):
-    if IsEmpty(S1):
-        return S2
+def MakeUnion(H1, H2):
+    if IsEmpty(H1):
+        return H2
     else:
-        if IsMember(FirstElmt(S1), S2):
-            return MakeUnion(Tail(S1), S2)
+        if IsMember(FirstElmt(H1), H2):
+            return MakeUnion(Tail(H1), H2)
         else:
-            return Konso(FirstElmt(S1), MakeUnion(Tail(S1), S2))
+            return Konso(FirstElmt(H1), MakeUnion(Tail(H1), H2))
         
 # APLIKASI
 print(MakeUnion([1,2,3],[3,4,5]))
@@ -180,14 +180,14 @@ print(MakeUnion([1,2,3],[4,5,6]))
 # NBIntersect: 2 set -> integer
 #   NBIntersect(H1,H2) menghasilkan jumlah elemen yang beririsan pada H1 dan H2
 #   tanpa memanfaatkan fungsi MakeIntersect(H1,H2).
-def NBIntersect(S1, S2):
-    if IsEmpty(S1) or IsEmpty(S2):
+def NBIntersect(H1, H2):
+    if IsEmpty(H1) or IsEmpty(H2):
         return 0
     else:
-        if IsMember(FirstElmt(S1), S2):
-            return 1 + NBIntersect(Tail(S1), S2)
+        if IsMember(FirstElmt(H1), H2):
+            return 1 + NBIntersect(Tail(H1), H2)
         else:
-            return 0 + NBIntersect(Tail(S1), S2)
+            return 0 + NBIntersect(Tail(H1), H2)
 
 # APLIKASI        
 print(NBIntersect([1,2,3],[3,4,5]))
@@ -197,17 +197,17 @@ print(NBIntersect([1,2,3],[6,5,3]))
 # NBUnion: 2 set -> integer
 #   NBUnion(H1,H2) menghasilkan jumlah elemen hasil gabungan antara H1 dan H2
 #   tanpa memanfaatkan fungsi MakeUnion(H1,H2).
-def NBUnion(S1, S2):
-    if IsEmpty(S1) and IsEmpty(S2):
+def NBUnion(H1, H2):
+    if IsEmpty(H1) and IsEmpty(H2):
         return 0
-    elif IsEmpty(S1) and not IsEmpty(S2):
-        return NbElmt(S2)
-    elif not IsEmpty(S1) and IsEmpty(S2):
-        return NbElmt(S1)
-    elif IsMember(FirstElmt(S1), S2):
-        return NBUnion(Tail(S1), S2)
+    elif IsEmpty(H1) and not IsEmpty(H2):
+        return NbElmt(H2)
+    elif not IsEmpty(H1) and IsEmpty(H2):
+        return NbElmt(H1)
+    elif IsMember(FirstElmt(H1), H2):
+        return NBUnion(Tail(H1), H2)
     else:
-        return 1 + NBUnion(Tail(S1), S2)
+        return 1 + NBUnion(Tail(H1), H2)
 
 # APLIKASI
 print(NBUnion([1,2,3],[]))
