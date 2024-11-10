@@ -12,19 +12,19 @@ from list import *
 #   Jika x ada di list L, maka elemen L berkurang 1.
 #   Jika x tidak ada di list L maka L tetap.
 #   List kosong tetap menjadi list kosong.
-def rember(x, L):
+def Rember(x, L):
     if IsEmpty(L):
         return []
     else:
         if FirstElmt(L) == x:
             return Tail(L)
         else:
-            return Konso(FirstElmt(L), rember(x, Tail(L)))
+            return Konso(FirstElmt(L), Rember(x, Tail(L)))
         
 # APLIKASI
-print(rember(2, []))
-print(rember(2, [3]))
-print(rember(2, [3,4,5,6,2,3,5,7,8,2]))
+print(Rember(2, []))
+print(Rember(2, [3]))
+print(Rember(2, [3,4,5,6,2,3,5,7,8,2]))
 
 # MultiRember: elemen, list -> list
 # MultiRember(x,L) menghapus semua kemunculan elemen x dari list L.
