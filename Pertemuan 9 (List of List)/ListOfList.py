@@ -5,7 +5,7 @@
 from list import *
 from set import *
 
-#Konstruktor
+# KONSTRUKTOR
 
 # DEFINISI DAN SPESIFIKASI
 # KonsLo(e, L): elemen, List of List --> List of List
@@ -15,11 +15,11 @@ def KonsLo(e, L):
 
 # DEFINISI DAN SPESIFIKASI
 # KonsLi(L, e): List of List, elemen --> List of List
-# KonsLi(L, e) Menambah6y5ukan elemen di baris akhir List of List
+# KonsLi(L, e) Menambahkan elemen di baris akhir List of List
 def KonsLi(L, e):
     return L + [e]
 
-# Selektor
+# SELEKTOR
 
 # DEFINISI DAN SPESIFIKASI
 # FirstList(L): List of List --> elemen
@@ -45,7 +45,7 @@ def HeadList(L):
 def TailList(L):
     return L[1:]
 
-# Predikat
+# PREDIKAT KHUSUS PADA LIST OF LIST
 
 # DEFINISI DAN SPESIFIKASI
 # isEmpty(L): List of List --> boolean
@@ -65,7 +65,7 @@ def IsAtom(S):
 def IsList(S):
     return type(S) == list
 
-# PREDIKAT
+# PREDIKAT LOL
 
 # DEFINISI DAN SPESIFIKASI
 # IsList: 2 List of List --> boolean
