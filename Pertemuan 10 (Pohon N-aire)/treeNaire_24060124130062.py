@@ -33,7 +33,7 @@ def isOneElmt(PN):
     return (isTreeNEmpty(PN) == False) and (isTreeNEmpty(anak(PN)) == True)
 
 # NbNELmt: PohonN-ner → integer ≥ 0
-# {NbNElmt(P) memberikan banyaknya node dari pohon P
+# {NbNElmt(PN) memberikan banyaknya node dari pohon P}
 # Basis 1: NbNELmt ((A)\) = 1
 # Rekurens NbNELmt ((A,PN)) = 1 + NbELmt(PN)
 def NbNElmt(PN):
@@ -57,6 +57,8 @@ def NbNElmtChild(PN):
     else:
         return NbNElmt(FirstElmt(PN)) + NbNElmtChild(Tail(PN))
 
+# NbNDaun: PohonN-ner → integer ≥ 1
+# {NbNDaun(PN) memberikan banyaknya daun dari pohon P}
 def NbNDaun(PN):
     # Basis: Jika pohon kosong
     if isTreeNEmpty(PN):
