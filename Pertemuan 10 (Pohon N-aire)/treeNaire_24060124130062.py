@@ -97,5 +97,20 @@ print(NbNDaun(T))
 print(NbNDaun(T2))
 
 # searchXTree: Tree -> boolean
+def searchXTree(x, PN):
+    if isTreeNEmpty(PN):
+        return False
+    elif FirstElmt(PN) == x:
+        return True
+    elif isTreeNEmpty(anak(PN)):
+        return False
+    else:
+        return searchXTree(x, FirstElmt(anak(PN))) or searchXTreeChild(x, Tail(anak(PN)))
+def searchXTreeChild(x, PN):
+    if isTreeNEmpty(PN):
+        return False
+    else:
+        return searchXTree(x, FirstElmt(PN)) or searchXTreeChild(x, Tail(PN))
 
-# 
+print(searchXTree('D', T2))
+print(searchXTree('E', T2))
