@@ -1,15 +1,17 @@
 # Nama File : treeNaire_24060124130062.py
 # Pembuat   : Muhammad Dimas Arya Putra
 # Tanggal   : 19 November 2024
-# Deskripsi : 
+# Deskripsi : Tree Naire atau Pohon N-ner adalah rangkaian tipe yang terdiri dari akar dan anak
 
 from list import *
 
 # DEFINISI DAN SPESIFIKASI KONSTRUKTOR
+
 def makePN(A, PN):
     return [A, PN]
 
 # DEFINISI DAN SPESIFIKASI SELEKTOR
+
 # Akar : PohonN-ner tidak kosong -> elemen
 # {Akar(P) adalah akar dari P. Jika P adalah (A, PN) = Akar(P) adalah A}
 def akar(PN):
@@ -32,8 +34,10 @@ def isTreeNEmpty(PN):
 def isOneElmt(PN):
     return (isTreeNEmpty(PN) == False) and (isTreeNEmpty(anak(PN)) == True)
 
+# DEFINISI DAN SPESIFIKASI FUNGSI/OPERASI
+
 # NbNELmt: PohonN-ner → integer ≥ 0
-# {NbNElmt(PN) memberikan banyaknya node dari pohon P}
+# {NbNElmt(PN) memberikan banyaknya node dari pohon PN}
 # Basis 1: NbNELmt ((A)\) = 1
 # Rekurens NbNELmt ((A,PN)) = 1 + NbELmt(PN)
 def NbNElmt(PN):
@@ -58,7 +62,7 @@ def NbNElmtChild(PN):
         return NbNElmt(FirstElmt(PN)) + NbNElmtChild(Tail(PN))
 
 # NbNDaun: PohonN-ner → integer ≥ 1
-# {NbNDaun(PN) memberikan banyaknya daun dari pohon P}
+# {NbNDaun(PN) memberikan banyaknya jumlah daun dari pohon PN}
 def NbNDaun(PN):
     # Basis: Jika pohon kosong
     if isTreeNEmpty(PN):
@@ -77,26 +81,9 @@ def NbNDaunChild(PN):
     # Jika ada anak, rekursif pada anak pertama dan sisa anak-anak
     else:
         return NbNDaun(FirstElmt(PN)) + NbNDaunChild(Tail(PN))
-    
-# APLIKASI
-T = makePN(2, [])
-print(makePN(2, []))
-print(isTreeNEmpty(T))
-print(isOneElmt(T))
 
-T2 = makePN(
-    'A',
-    [
-        makePN('B',[makePN('D', []), makePN('E', []), makePN('F', [])]), makePN('C',[makePN('G',[]), makePN('H',[makePN('I',[])])])
-    ]
-)   
-print(T2)
-print(NbNElmt(T))
-print(NbNElmt(T2))
-print(NbNDaun(T))
-print(NbNDaun(T2))
-
-# searchXTree: Tree -> boolean
+# searchXTree: elemen, Tree -> boolean
+# {searchXTree(x, PN) berfungsi untuk mencari elemen pada pohon PN, benar jika elemen terdapat dalam pohon PN}
 def searchXTree(x, PN):
     if isTreeNEmpty(PN):
         return False
@@ -111,6 +98,22 @@ def searchXTreeChild(x, PN):
         return False
     else:
         return searchXTree(x, FirstElmt(PN)) or searchXTreeChild(x, Tail(PN))
-
-print(searchXTree('D', T2))
-print(searchXTree('E', T2))
+  
+# APLIKASI
+T = makePN(2, [])
+print(makePN(2, []))
+print(isTreeNEmpty(T))
+print(isOneElmt(T))
+T2 = makePN(
+    'A',
+    [
+        makePN('B',[makePN('D', []), makePN('E', []), makePN('F', [])]), makePN('C',[makePN('G',[]), makePN('H',[makePN('I',[])])])
+    ]
+)   
+print(T2)
+print(NbNElmt(T))
+print(NbNElmt(T2))
+print(NbNDaun(T))
+print(NbNDaun(T2))
+print(searchXTree('I', T2))
+print(searchXTree('J', T2))
