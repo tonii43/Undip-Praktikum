@@ -3,7 +3,6 @@
 # Deskripsi Fungsi  : List of List
 
 from list import *
-from set import *
 
 # KONSTRUKTOR
 
