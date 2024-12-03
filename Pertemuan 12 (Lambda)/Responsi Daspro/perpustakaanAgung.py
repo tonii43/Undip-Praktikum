@@ -98,26 +98,16 @@ def AddToShelf(tag, book):
 # AddBooks: shelves, string, list -> shelves
 # fungsi ini mengeluarkan shelves yang sudah ada dengan menambahkan buku ke sebuah shelf dengan tag tertentu
 
-def cariTag(shelves,tag) :
-    if IsEmpty(shelves):
-        return False
-    else:
-        if getTag(shelves) == tag :
-            return True
-        else:
-            return cariTag(TailList(shelves),tag)
-
 def AddBooks(shelves, tag, book):
     if IsEmpty(book):
         return shelves
+    if IsEmpty(shelves):
+        return makeShelf(tag,book)
     else:
-        if cariTag(shelves, tag):
-            if getTag(shelves) == tag:
-                return Konso(Konso(getTag(shelves), [concatList(LastList(FirstList(shelves)), book)]), TailList(shelves))
-            else:
-                return Konso(FirstList(shelves), AddBooks(TailList(shelves), tag, book))
+        if getTag(shelves) == tag:
+            return makeShelf(getTag(shelves), getBooks(shelves) + book) + TailList(shelves)
         else:
-            return concatList(shelves, makeShelf(tag, book))
+            return Konso(FirstList(shelves),AddBooks(TailList(shelves),tag,book))
 
 
 # ----------------- APLIKASI ------------------------
