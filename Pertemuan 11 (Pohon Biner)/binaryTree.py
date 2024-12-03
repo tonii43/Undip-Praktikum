@@ -198,6 +198,52 @@ def DelDaun(P, X):
         return []
     else:
         return MakePB(Akar(P), DelDaun(Left(P), X), DelDaun(Right(P), X))
+    
+
+def AddX(P, X):
+    if IsEmpty(P):
+        return MakePB(X, [], [])
+    else:
+        if X > Akar(P):
+            return MakePB(Akar(P), Left(P), AddX(Right(P), X))
+        else:
+            return MakePB(Akar(P), AddX(Left(P), X), Right(P))
+
+
+def Delete(P, X):
+    if IsEmpty(P):
+        return []
+    else:
+        if Akar(P) == X:
+            if IsEmpty(Left(P)) and IsEmpty(Right(P)):
+                return []
+            #elif not IsEmpty(Left(P)) and not IsEmpty(Right(P)) :
+
+            else:
+                if IsEmpty(Left(P)):
+                    return Right(P)
+                    #return MakePB(Akar(Right(P)), Left(P), Right(Right(P)))
+                else:
+                    return Left(P)
+                    #return MakePB(Akar(Left(P)), Left(Left(P)), Right(P))
+
+        elif X >= Akar(P):
+            return MakePB(Akar(P), Left(P), Delete(Right(P), X))
+        else:
+            return MakePB(Akar(P), Delete(Left(P), X), Right(P)) 
+
+
+def BSearchX(BST, x):
+    if Akar(BST) == x:
+        return True
+    elif IsOneElmt(BST):
+        return False
+    elif IsBiner(BST):
+        return BSearchX(Left(BST),x) or BSearchX(Right(BST),x)
+    elif IsUnerLeft(BST):
+        return BSearchX(Left(BST),x)
+    elif IsUnerRight(BST):
+        return BSearchX(Right(BST),x)
 
 
 def MakeListDaun(P):
@@ -260,3 +306,6 @@ print("Buat list pre order: ", MakeListPreOrder(T))
 print("Buat list post order: ", MakeListPostOrder(T))
 print("Buat list in order: ", MakeListInOrder(T))
 print("Buat list level: ", MakeListLevel(T, 2))
+print("Tambah X: ", AddX(T, 'Z'))
+print("Delete X: ", Delete(T, 'B'))
+print("Apakah F ada di dalam Tree: ", BSearchX(T, 'F'))
