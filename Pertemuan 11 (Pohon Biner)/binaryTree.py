@@ -64,8 +64,8 @@ def IsExistLeft(T) :
 # IsExistRight : PohonBiner tidak kosong → boolean
 #  {ExistRight(P) true jika P mengandung sub pohon kanan }
 def IsExistRight(T) :
-    return (not IsTreeEmpty(Right(T)))
-    
+    return (not IsTreeEmpty(Right(T)))   
+
 
 def PrintBinaryTreeHelp(T, indent):
     if T != []:
@@ -75,29 +75,19 @@ def PrintBinaryTreeHelp(T, indent):
     else:
         print(indent + "[]")
 
+
 def PrintBinaryTree(T):
     PrintBinaryTreeHelp(T, '')
+
 
 def NbElmtTree(T):
     if IsTreeEmpty(T):
         return 0
     else:
         return NbElmtTree(Left(T)) + 1 + NbElmtTree(Right(T))
+    
 
 def NbDaun(T) :
-    if IsTreeEmpty(T):
-        return 0
-    elif IsOneElmt(T) :
-        print(Akar(T))
-        return 1
-    # elif (not IsEmpty(Left(T))) and (IsEmpty(Right(T))) :
-    #     return NbDaun(Left(T))
-    # elif (IsEmpty(Left(T))) and (not IsEmpty(Right(T))) :
-    #     return NbDaun(Right(T))
-    else : 
-        return NbDaun(Left(T)) + NbDaun(Right(T))
-    
-def NbDaun1(T) :
     if IsOneElmt(T) :
         print(Akar(T))
         return 1
@@ -109,6 +99,147 @@ def NbDaun1(T) :
         return NbDaun(Right(T))
 
 
+def NbDaun1(P):
+    if IsOneElmt(P):
+        return 1
+    elif IsBiner(P):
+        return NbDaun1(Left(P)) + NbDaun1(Right(P))
+    elif IsUnerLeft(P):
+        return NbDaun1(Left(P))
+    elif IsUnerRight(P):
+        return NbDaun1(Right(P))
+
+
+def IsMember(P, X):
+    if IsOneElmt(P):
+        return Akar(P) == X
+    elif Akar(P) == X:
+        return True
+    elif IsBiner(P):
+        return IsMember(Left(P), X) or IsMember(Right(P), X)
+    elif IsUnerLeft(P):
+        return IsMember(Left(P), X)
+    elif IsUnerRight(P):
+        return IsMember(Right(P), X)
+
+
+def IsSkewLeft(P):
+    if IsOneElmt(P):
+        return True
+    else:
+        return IsUnerLeft(P)
+
+
+def IsSkewRight(P):
+    if IsOneElmt(P):
+        return True
+    else:
+        return IsUnerRight(P)
+
+
+def max2(a, b):
+    return a if a > b else b
+
+
+def Level(P, X, lvl):
+    if IsTreeEmpty(P):
+        return 0
+    elif Akar(P) == X:
+        return lvl
+    else:
+        return max2(Level(Left(P), X, lvl + 1), Level(Right(P), X, lvl + 1))
+
+
+def LevelOfX(P, X):
+    if IsTreeEmpty(P):
+        return 0
+    elif Akar(P) == X:
+        return 0
+    else:
+        return Level(P, X, 0)
+
+
+def AddDaunTerkiri(P, X):
+    if IsTreeEmpty(P):
+        return MakePB(X, [], [])
+    elif IsUnerRight(P):
+        return MakePB(Akar(P), Left(P), AddDaunTerkiri(Right(P), X))
+    else:
+        return MakePB(Akar(P), AddDaunTerkiri(Left(P), X), Right(P))
+
+
+def AddDaun(P, X, Y, Kiri):
+    if IsTreeEmpty(P):
+        return P
+    elif Akar(P) == X:
+        if Kiri:
+            return MakePB(X, MakePB(Y, [], []), Right(P))
+        else:
+            return MakePB(X, Left(P), MakePB(Y, [], []))
+    else:
+        return MakePB(
+            Akar(P), AddDaun(Left(P), X, Y, Kiri), AddDaun(Right(P), X, Y, Kiri)
+        )
+
+
+def DelDaunTerkiri(P):
+    if IsOneElmt(P):
+        return []
+    elif IsUnerRight(P):
+        return MakePB(Akar(P), Left(P), DelDaunTerkiri(Right(P)))
+    else:
+        return MakePB(Akar(P), DelDaunTerkiri(Left(P)), Right(P))
+
+
+def DelDaun(P, X):
+    if IsTreeEmpty(P):
+        return P
+    elif Akar(P) == X:
+        return []
+    else:
+        return MakePB(Akar(P), DelDaun(Left(P), X), DelDaun(Right(P), X))
+
+
+def MakeListDaun(P):
+    if IsTreeEmpty(P):
+        return []
+    elif IsOneElmt(P):
+        return [Akar(P)]
+    else:
+        return MakeListDaun(Left(P)) + MakeListDaun(Right(P))
+
+
+def MakeListPreOrder(P):
+    if IsTreeEmpty(P):
+        return []
+    else:
+        return [Akar(P)] + MakeListPreOrder(Left(P)) + MakeListPreOrder(Right(P))
+
+
+def MakeListPostOrder(P):
+    if IsTreeEmpty(P):
+        return []
+    else:
+        return MakeListPostOrder(Left(P)) + MakeListPostOrder(Right(P)) + [Akar(P)]
+
+
+def MakeListInOrder(P):
+    if IsTreeEmpty(P):
+        return []
+    else:
+        return MakeListInOrder(Left(P)) + [Akar(P)] + MakeListInOrder(Right(P))
+
+
+def MakeListLevel(P, N):
+    if IsTreeEmpty(P):
+        return []
+    elif N == 0:
+        return [Akar(P)]
+    else:
+        return MakeListLevel(Left(P), N - 1) + MakeListLevel(Right(P), N - 1)
+
+
+# APLIKASI
 
 T = MakePB('A', MakePB('B', MakePB('C', [], []), MakePB('D', MakePB('E', [], []), MakePB('F', [], []))), MakePB('G', MakePB('H', [], []), []))
 PrintBinaryTree(T)
@@ -116,3 +247,16 @@ print(T)
 print("Jumlah daun di dalam Tree pake NB1: ", NbDaun1(T))
 print("Jumlah node di dalam Tree: ", NbElmtTree(T))
 print("Jumlah daun di dalam Tree: ", NbDaun(T))
+print("Apakah 1 ada di dalam Tree: ", IsMember(T, 'A'))
+print("Jumlah level dari 'A' di dalam Tree: ", LevelOfX(T, 'A'))
+print("Apakah Tree skew ke kiri: ", IsSkewLeft(T))
+print("Apakah Tree skew ke kanan: ", IsSkewRight(T))
+print("Tambah daun terkiri: ", AddDaunTerkiri(T, 'I'))
+print("Tambah daun: ", AddDaun(T, 'B', 'I', True))
+print("Hapus daun terkiri: ", DelDaunTerkiri(T))
+print("Hapus daun: ", DelDaun(T, 'B'))
+print("Buat list daun: ", MakeListDaun(T))
+print("Buat list pre order: ", MakeListPreOrder(T))
+print("Buat list post order: ", MakeListPostOrder(T))
+print("Buat list in order: ", MakeListInOrder(T))
+print("Buat list level: ", MakeListLevel(T, 2))
